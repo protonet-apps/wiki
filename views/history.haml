@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %title
+      Revision History - 
+      = h(@versions.last[:title])
+      \ - Protonet Wiki
+  %body
+    %h1
+      %a{:href => "/#{@page[:name]}"}
+        = h(@versions.last[:title])
+    %h2 Revision History
+
+    %ul
+      - @versions.each do |version|
+        %li
+          %a{:href => "/#{@page[:name]}/versions/#{version[:id]}"}
+            %span= version[:created_at]
+            by
+            %span= version[:user_id]

@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "Daniel Lamando",
+    "email": "me@danopia.net",
+    "homepage": "http://danopia.net/"
+  },
+  "name": "wiki",
+  "title": "Wiki",
+  "description": "Collaborate on an organized collection of pages",
+  "version": "0.0.1",
+  "homepage": "https://protonet-apps.github.com/wiki",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/protonet-apps/wiki.git"
+  },
+  "database": "mysql",
+  "views": {
+    "lightbox": "/"
+  }
+}

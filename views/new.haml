@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title New Page - Protonet Wiki
+  %body
+    %h1 New Page
+    %hr
+
+    %form{:method => 'POST', :action => '/'}
+      %p
+        Slug (for URLs)
+        %input{:type => 'text', :name => 'name'}
+      %p
+        Title
+        %input{:type => 'text', :name => 'title'}
+      %p
+        %textarea{:name => 'body'}
+      %p
+        %input{:type => 'submit', :value => 'Create page'}

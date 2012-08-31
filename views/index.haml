@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title Protonet Wiki
+  %body
+    %h1 Wiki - it's yours [to edit]
+    
+    %p Keep all of your pages readily accessible without giving up the data :)
+    
+    %p
+      Debug info: you are
+      = 'not logged in'
+
+    %ul
+      - @pages.each do |item|
+        %li{:class => 'pending'}
+          %a{:href => "/#{item[:name]}"}= h(item[:title])
+      %li{:class => 'new'}
+        %a{:href => '/new'} New page

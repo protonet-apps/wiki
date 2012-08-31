@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %title
+      Edit -
+      = h(@version[:title])
+      \ - Protonet Wiki
+  %body
+    %h1= h(@version[:title])
+    %h2 New Revision
+    %p
+      %em
+        Last edited by
+        = @version[:user_id]
+        on
+        = @version[:created_at]
+        \-
+        %a{:href => "/#{@page[:name]}/versions"} other versions
+    %hr
+
+    %form{:method => 'POST', :action => "/#{@page[:name]}"}
+      %input{:type => 'hidden', :name => '__method', :value => 'PUT'}>
+      %p
+        Title
+        %input{:type => 'text', :name => 'title', :value => @version[:title]}
+      %p
+        %textarea{:name => 'body'}
+          = preserve(h(@version[:body]))
+      %p
+        %input{:type => 'submit', :value => 'Save changes'}
