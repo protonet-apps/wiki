@@ -16,5 +16,6 @@
   "database": "mysql",
   "views": {
     "lightbox": "/"
-  }
+  },
+  "setup": "ruby migrate.rb"
 }

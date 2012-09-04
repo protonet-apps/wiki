@@ -3,66 +3,14 @@ require 'rdiscount'
 require 'sequel'
 require 'logger'
 
-DB = if ENV.key? 'DATABASE_URL'
-  Sequel.connect ENV['DATABASE_URL']
+if ENV.key? 'DATABASE_URL'
+  DB = Sequel.connect ENV['DATABASE_URL']
+  raise 'Not migrated' unless DB.table_exists?(:pages)
 else
-  Sequel.sqlite
+  DB = Sequel.sqlite
+  require './migrate'
 end
-DB.loggers << Logger.new(STDOUT)
-
-unless DB.table_exists?(:pages) && DB.table_exists?(:versions)
-  DB.create_table :pages do
-    primary_key :id
-
-    String   :name,        :null => false, :unique => true
-    constraint(:name_min_length) { length(name) > 0 }
-
-    DateTime :created_at, :null => false
-    index    :created_at
-  end
-
-  ['home', 'api', 'ui', 'db'].each do |seed|
-    DB[:pages] << {:name => seed, :created_at => Time.now}
-  end
-  
-  DB.create_table :versions do
-    primary_key :id
-    foreign_key :page_id, :pages, :null => false
-    index       :page_id
-
-    Fixnum      :user_id,    :null => false
-    index       :user_id
-    
-    String      :title,       :null => false
-    constraint(:title_min_length) { length(title) > 0 }
-    String      :body,        :null => false, :text => true
-    constraint(:body_min_length)  { length(body) > 0 }
-
-    DateTime    :created_at, :null => false
-    index       :created_at
-  end
-
-  DB[:versions].multi_insert([
-    {:page_id => 1, :user_id => 1, :title => 'Home', :body => 'Welcome to the wiki homepage.', :created_at => Time.now},
-    {:page_id => 2, :user_id => 1, :title => 'API docs', :body => 'iframes all the way, man!', :created_at => Time.now},
-    {:page_id => 2, :user_id => 2, :title => 'API docs', :body => 'binary all the way, man!', :created_at => Time.now+1},
-    {:page_id => 2, :user_id => 1, :title => 'API docs', :body => 'RESTful all the way, man!', :created_at => Time.now+2},
-    {:page_id => 3, :user_id => 1, :title => 'UI spec', :body => 'It\'s a GUI interface in Visual Basic that will be capable of tracking an IP address.', :created_at => Time.now},
-    {:page_id => 3, :user_id => 2, :title => 'UI spec', :body => 'It\'s a GUI interface in Visual Basic that\'s capable of tracking an IP address.', :created_at => Time.now+1},
-    {:page_id => 4, :user_id => 3, :title => 'DB schema', :body => 'There\'s multiple tables', :created_at => Time.now},
-  ])
-  
-  
-  DB.alter_table :pages do
-    add_foreign_key :version_id, :versions
-    add_index       :version_id
-  end
-  
-  DB[:pages].where(:id => 1).update(:version_id => 1)
-  DB[:pages].where(:id => 2).update(:version_id => 4)
-  DB[:pages].where(:id => 3).update(:version_id => 6)
-  DB[:pages].where(:id => 4).update(:version_id => 7)
-end
+DB.loggers << Logger.new(STDOUT) if ENV['RACK_ENV'] != 'production'
 
 helpers do
   include Rack::Utils
