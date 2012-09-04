@@ -8,7 +8,7 @@
   "title": "Wiki",
   "description": "Collaborate on an organized collection of pages",
   "version": "0.0.1",
-  "homepage": "https://protonet-apps.github.com/wiki",
+  "homepage": "http://protonet-apps.github.com/wiki",
   "repository": {
     "type": "git",
     "url": "git://github.com/protonet-apps/wiki.git"
