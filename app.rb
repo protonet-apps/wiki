@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'haml'
 require 'rdiscount'
 require 'sequel'
 require 'logger'
