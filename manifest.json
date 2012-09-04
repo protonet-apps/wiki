@@ -15,7 +15,8 @@
   },
   "database": "mysql",
   "views": {
-    "lightbox": "/"
+    "lightbox": "/",
+		"icon": "/wiki.png"
   },
   "setup": "ruby migrate.rb"
 }
