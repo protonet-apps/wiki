@@ -3,6 +3,7 @@ require 'haml'
 require 'rdiscount'
 require 'sequel'
 require 'logger'
+require 'json'
 
 if ENV.key? 'DATABASE_URL'
   DB = Sequel.connect ENV['DATABASE_URL']

@@ -9,7 +9,7 @@
     
     %p
       [debug] User hash:
-      %span= JSON.parse(request.env['HTTP_X_USER']).inspect
+      %span= (JSON.parse(request.env['HTTP_X_USER']) rescue nil).inspect
 
     %ul
       - @pages.each do |item|
