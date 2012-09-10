@@ -9,7 +9,7 @@
     
     %p<
       Debug info: you are user #
-      %span>= request['X-User-Id']
+      %span>= request.env['HTTP_X_USER_ID']
 
     %ul
       - @pages.each do |item|
