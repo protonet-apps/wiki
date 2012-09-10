@@ -6,7 +6,7 @@ require 'logger'
 
 if ENV.key? 'DATABASE_URL'
   DB = Sequel.connect ENV['DATABASE_URL']
-  raise 'Not migrated' unless DB.table_exists?(:repos)
+  raise 'Not migrated' unless DB.table_exists?(:pages) && DB.table_exists?(:versions)
 elsif ENV['RACK_ENV'] != 'production'
   DB = Sequel.sqlite
   require './migrate'
