@@ -7,9 +7,9 @@
     
     %p Keep all of your pages readily accessible without giving up the data :)
     
-    %p<
-      Debug info: you are user #
-      %span>= request.env['HTTP_X_USER_ID']
+    %p
+      [debug] User hash:
+      %span= JSON.parse(request.env['HTTP_X_USER']).inspect
 
     %ul
       - @pages.each do |item|
