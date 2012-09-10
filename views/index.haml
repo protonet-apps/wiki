@@ -7,9 +7,9 @@
     
     %p Keep all of your pages readily accessible without giving up the data :)
     
-    %p
-      Debug info: you are
-      = 'not logged in'
+    %p<
+      Debug info: you are user #
+      %span>= request['X-User-Id']
 
     %ul
       - @pages.each do |item|
