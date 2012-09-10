@@ -21,12 +21,6 @@ helpers do
 end
 
 
-post '*' do
-  pass unless params[:__method]
-  call env.merge('REQUEST_METHOD' => params[:__method])
-end
-
-
 get '/' do
   @pages = DB[:pages].join(:versions, :id => :version_id).all
   
