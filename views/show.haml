@@ -13,9 +13,9 @@
         on
         = @version[:created_at]
         \-
-        %a{:href => "/#{@page[:name]}/versions"} other versions
+        %a{:href => url("/#{@page[:name]}/versions")} other versions
         \-
-        %a{:href => "/#{@page[:name]}/versions/new"} edit
+        %a{:href => url("/#{@page[:name]}/versions/new")} edit
     %hr
 
     = RDiscount.new(@version[:body], :filter_html).to_html

@@ -15,10 +15,10 @@
         on
         = @version[:created_at]
         \-
-        %a{:href => "/#{@page[:name]}/versions"} other versions
+        %a{:href => url("/#{@page[:name]}/versions")} other versions
     %hr
 
-    %form{:method => 'POST', :action => "/#{@page[:name]}"}
+    %form{:method => 'POST', :action => url("/#{@page[:name]}")}
       %input{:type => 'hidden', :name => '__method', :value => 'PUT'}>
       %p
         Title

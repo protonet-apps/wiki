@@ -14,6 +14,6 @@
     %ul
       - @pages.each do |item|
         %li{:class => 'pending'}
-          %a{:href => "/#{item[:name]}"}= h(item[:title])
+          %a{:href => url("/#{item[:name]}")}= h(item[:title])
       %li{:class => 'new'}
-        %a{:href => '/new'} New page
+        %a{:href => url('/new')} New page

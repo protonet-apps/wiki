@@ -85,7 +85,7 @@ put '/:name' do |name|
   
   DB[:pages].where(:id => @page[:id]).update(:version_id => version_id)
   
-  redirect "/#{@page[:name]}"
+  redirect url("/#{@page[:name]}")
 end
 
 post '/' do
@@ -106,5 +106,5 @@ post '/' do
   
   DB[:pages].where(:id => page_id).update(:version_id => version_id)
   
-  redirect "/#{params[:name]}"
+  redirect url("/#{params[:name]}")
 end
